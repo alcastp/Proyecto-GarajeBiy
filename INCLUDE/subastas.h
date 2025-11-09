@@ -1,5 +1,7 @@
 #ifndef SUBASTAS_H
 #define SUBASTAS_H
+#include "usuario.h"
+
 
 typedef struct {
     int id;
@@ -9,9 +11,11 @@ typedef struct {
     int activa;
 } Subasta;
 
-void registrarSubasta();
 void buscarSubasta();
 void verSubastasActivas();
+void verMejoresOfertas();
+void realizarOferta(Usuario *usuario);
+void registrarSubasta();
 void finalizarSubasta();
 
 #endif
