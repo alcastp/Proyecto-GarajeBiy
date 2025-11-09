@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "usuarios.h"
+#include "usuario.h"
 #include "subastas.h"
 #include "archivos.h"
 #include "estadisticas.h"
