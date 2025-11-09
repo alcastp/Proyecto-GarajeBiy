@@ -1,3 +1,6 @@
+#ifndef USUARIO_H
+#define USUARIO_H
+
 typedef enum {
     COMPRADOR,
     COORDINADOR
@@ -10,3 +13,10 @@ typedef struct {
     char clave[30];
     Rol rol;
 } Usuario;
+
+
+int login(Usuario *usuario);
+void listarUsuarios();
+void agregarUsuario();
+
+#endif
