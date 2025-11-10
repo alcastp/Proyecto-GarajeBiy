@@ -15,8 +15,9 @@ typedef struct {
 } Usuario;
 
 
-int login(Usuario *usuario);
+Usuario* login();
+void crearUsuario();
 void listarUsuarios();
-void agregarUsuario();
+void eliminarUsuario();
 
 #endif
