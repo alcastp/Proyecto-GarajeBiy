@@ -13,6 +13,6 @@ typedef struct {
 
 void cargarUsuariosCSV();
 void guardarUsuariosCSV();
-Usuario* buscarUsuarioPorCorreo(char* correo);
+Usuario* login();
 
 #endif
