@@ -1,23 +1,18 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-typedef enum {
-    COMPRADOR,
-    COORDINADOR
-} Rol;
+typedef enum {COORDINADOR, COMPRADOR} Rol;
 
-typedef struct {     
+typedef struct {
     int id;
     char nombre[50];
-    char usuario[20];
+    char correo[50];
     char clave[30];
     Rol rol;
 } Usuario;
 
-
-Usuario* login();
-void crearUsuario();
-void listarUsuarios();
-void eliminarUsuario();
+void cargarUsuariosCSV();
+void guardarUsuariosCSV();
+Usuario* buscarUsuarioPorCorreo(char* correo);
 
 #endif
