@@ -7,32 +7,18 @@
 #include "archivos.h"
 #include "estadisticas.h"
 
-
-// Funciones generales
-
-// Limpia el buffer del teclado tras usar scanf
-void limpiarBuffer();
-
-// Menú principal (dependiendo del rol)
+// Menú principal
 void mostrarMenuPrincipal(Usuario *usuarioActual);
 
+// Submenús
+void submenuSubastas(Usuario *usuarioActual);
+void submenuOfertas(Usuario *usuarioActual);
+void submenuUsuarios();
+void submenuArchivos();
+void submenuEstadisticas();
 
-// Submenús por categoría
+// Utilidad
+void limpiarBuffer();
 
-// Opciones de subastas (coordinador + comprador)
-void mostrarSubmenuSubastas(Usuario *usuarioActual);
-
-// Opciones de ofertas (solo comprador)
-void mostrarSubmenuOfertas(Usuario *usuarioActual);
-
-// Gestión de usuarios (solo coordinador)
-void mostrarSubmenuUsuarios(Usuario *usuarioActual);
-
-// Guardar / cargar datos
-void mostrarSubmenuArchivos(Usuario *usuarioActual);
-
-// Estadísticas globales
-void mostrarSubmenuEstadisticas(Usuario *usuarioActual);
-
-#endif
+#endif // MENU_H
 

@@ -1,116 +1,219 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "menu.h"
-#include "archivos.h"
-#include "estadisticas.h"
 #include "usuario.h"
-#include "extra.h"
 
-/* Submenús específicos (Archivos, estadísticas y gestión de usuarios) */
-
-void submenuArchivos() {
+// ========================================================
+//                   SUBMENÚ DE SUBASTAS
+// ========================================================
+void submenuSubastas(Usuario *usuarioActual) {
     int opcion;
+
     do {
-        printf("\n----------------------------------------\n");
-        printf("       Submenú de Archivos\n");
-        printf("----------------------------------------\n");
-        printf("1. Guardar datos en CSV\n");
-        printf("2. Cargar datos desde CSV\n");
-        printf("3. Volver al menú principal\n");
-        printf("----------------------------------------\n");
+        printf("\n========================================\n");
+        printf("             SUBMENÚ SUBASTAS\n");
+        printf("========================================\n");
+        printf("1. Ver subastas activas\n");
+        printf("2. Participar en subasta\n");
+
+        if (usuarioActual->rol == COORDINADOR) {
+            printf("3. Crear subasta\n");
+            printf("4. Cerrar subasta\n");
+        }
+
+        printf("0. Volver\n");
         printf("Seleccione una opción: ");
-        if (scanf("%d", &opcion) != 1) {
-            opcion = -1;
-        }
-        limpiarBuffer();
-
-        switch (opcion) {
-            case 1: 
-                guardarDatos(); 
-                break;
-            case 2: 
-                cargarDatos(); 
-                break;
-            case 3: 
-                printf("Volviendo al menú principal...\n"); 
-                break;
-            default: 
-                printf("Opción inválida.\n"); 
-                break;
-        }
-    } while (opcion != 3);
-}
-
-void submenuUsuarios() {
-    int opcion;
-    do {
-        printf("\n----------------------------------------\n");
-        printf("     Submenú de Gestión de Usuarios\n");
-        printf("----------------------------------------\n");
-        printf("1. Crear nuevo usuario\n");
-        printf("2. Listar usuarios registrados\n");
-        printf("3. Eliminar usuario\n");
-        printf("4. Volver al menú principal\n");
-        printf("----------------------------------------\n");
-        printf("Seleccione una opción: ");
-        if (scanf("%d", &opcion) != 1) {
-            opcion = -1;
-        }
-        limpiarBuffer();
-
-        switch (opcion) {
-            case 1: 
-                crearUsuario(); 
-                break;
-            case 2: 
-                listarUsuarios(); 
-                break;
-            case 3: 
-                eliminarUsuario(); 
-                break;
-            case 4: 
-                printf("Volviendo...\n"); 
-                break;
-            default: 
-                printf("Opción inválida.\n"); 
-                break;
-        }
-    } while (opcion != 4);
-}
-
-void submenuEstadisticas() {
-    int opcion;
-    do {
-        printf("\n----------------------------------------\n");
-        printf("        Submenú de Estadísticas\n");
-        printf("----------------------------------------\n");
-        printf("1. Total de subastas creadas\n");
-        printf("2. Subastas finalizadas exitosamente\n");
-        printf("3. Promedio de ofertas por subasta\n");
-        printf("4. Usuarios activos\n");
-        printf("5. Volver al menú principal\n");
-        printf("----------------------------------------\n");
-        printf("Seleccione una opción: ");
-        if (scanf("%d", &opcion) != 1) {
-            opcion = -1;
-        }
+        scanf("%d", &opcion);
         limpiarBuffer();
 
         switch (opcion) {
             case 1:
+                printf("Función: Ver subastas activas.\n");
+                break;
+
             case 2:
+                printf("Función: Participar en subasta.\n");
+                break;
+
             case 3:
+                if (usuarioActual->rol == COORDINADOR)
+                    printf("Función: Crear subasta.\n");
+                else
+                    printf("No tiene permisos.\n");
+                break;
+
             case 4:
-                /* La función interna mostrará las métricas según corresponda */
-                mostrarEstadisticas();
+                if (usuarioActual->rol == COORDINADOR)
+                    printf("Función: Cerrar subasta.\n");
+                else
+                    printf("No tiene permisos.\n");
                 break;
-            case 5:
-                printf("Volviendo al menú principal...\n");
+
+            case 0:
                 break;
+
             default:
                 printf("Opción inválida.\n");
-                break;
         }
-    } while (opcion != 5);
+
+    } while (opcion != 0);
+}
+
+// ========================================================
+//                    SUBMENÚ DE OFERTAS
+// ========================================================
+void submenuOfertas(Usuario *usuarioActual) {
+    int opcion;
+
+    do {
+        printf("\n========================================\n");
+        printf("              SUBMENÚ OFERTAS\n");
+        printf("========================================\n");
+        printf("1. Realizar oferta\n");
+        printf("2. Ver mejores ofertas\n");
+        printf("3. Historial de ofertas\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+        limpiarBuffer();
+
+        switch (opcion) {
+            case 1:
+                printf("Función: Realizar oferta.\n");
+                break;
+
+            case 2:
+                printf("Función: Ver mejores ofertas.\n");
+                break;
+
+            case 3:
+                printf("Función: Historial de ofertas.\n");
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("Opción inválida.\n");
+        }
+
+    } while (opcion != 0);
+}
+
+// ========================================================
+//                SUBMENÚ DE USUARIOS (COORDINADOR)
+// ========================================================
+void submenuUsuarios() {
+    int opcion;
+
+    do {
+        printf("\n========================================\n");
+        printf("            SUBMENÚ USUARIOS\n");
+        printf("========================================\n");
+        printf("1. Crear usuario\n");
+        printf("2. Listar usuarios\n");
+        printf("3. Eliminar usuario\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+        limpiarBuffer();
+
+        switch (opcion) {
+            case 1:
+                printf("Función: Crear usuario.\n");
+                break;
+
+            case 2:
+                printf("Función: Listar usuarios.\n");
+                break;
+
+            case 3:
+                printf("Función: Eliminar usuario.\n");
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("Opción inválida.\n");
+        }
+
+    } while (opcion != 0);
+}
+
+// ========================================================
+//                   SUBMENÚ DE ARCHIVOS
+// ========================================================
+void submenuArchivos() {
+    int opcion;
+
+    do {
+        printf("\n========================================\n");
+        printf("           SUBMENÚ ARCHIVOS (CSV)\n");
+        printf("========================================\n");
+        printf("1. Cargar datos desde archivo\n");
+        printf("2. Guardar datos en archivo\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+        limpiarBuffer();
+
+        switch (opcion) {
+            case 1:
+                printf("Función: Cargar datos.\n");
+                break;
+
+            case 2:
+                printf("Función: Guardar datos.\n");
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("Opción inválida.\n");
+        }
+
+    } while (opcion != 0);
+}
+
+// ========================================================
+//                   SUBMENÚ DE ESTADÍSTICAS
+// ========================================================
+void submenuEstadisticas() {
+    int opcion;
+
+    do {
+        printf("\n========================================\n");
+        printf("            SUBMENÚ ESTADÍSTICAS\n");
+        printf("========================================\n");
+        printf("1. Totales\n");
+        printf("2. Promedios\n");
+        printf("3. Finalizadas\n");
+        printf("0. Volver\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+        limpiarBuffer();
+
+        switch (opcion) {
+            case 1:
+                printf("Función: Estadísticas totales.\n");
+                break;
+
+            case 2:
+                printf("Función: Estadísticas promedios.\n");
+                break;
+
+            case 3:
+                printf("Función: Estadísticas finalizadas.\n");
+                break;
+
+            case 0:
+                break;
+
+            default:
+                printf("Opción inválida.\n");
+        }
+
+    } while (opcion != 0);
 }

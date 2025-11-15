@@ -2,78 +2,71 @@
 #include <stdlib.h>
 #include "menu.h"
 
-// ------------------------------------------------------------
-// Limpieza de buffer para evitar problemas con scanf
-// ------------------------------------------------------------
 void limpiarBuffer() {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
+// ========================================================
+//                    MENÚ PRINCIPAL
+// ========================================================
 void mostrarMenuPrincipal(Usuario *usuarioActual) {
     int opcion;
 
     do {
         printf("\n========================================\n");
-        printf("              MENÚ PRINCIPAL\n");
+        printf("            MENÚ PRINCIPAL\n");
         printf("========================================\n");
         printf("1. Subastas\n");
+        printf("2. Ofertas\n");
 
-        if (usuarioActual->rol == COMPRADOR)
-            printf("2. Ofertas\n");
-
-        if (usuarioActual->rol == COORDINADOR)
-            printf("3. Gestión de Usuarios\n");
-
-        printf("4. Archivos\n");
-
-        if (usuarioActual->rol == COORDINADOR)
+        if (usuarioActual->rol == COORDINADOR) {
+            printf("3. Usuarios\n");
+            printf("4. Archivos\n");
             printf("5. Estadísticas\n");
+        }
 
-        printf("6. Cerrar sesión\n");
+        printf("0. Cerrar sesión\n");
         printf("Seleccione una opción: ");
         scanf("%d", &opcion);
         limpiarBuffer();
 
         switch (opcion) {
             case 1:
-                mostrarSubmenuSubastas(usuarioActual);
+                submenuSubastas(usuarioActual);
                 break;
 
             case 2:
-                if (usuarioActual->rol == COMPRADOR)
-                    mostrarSubmenuOfertas(usuarioActual);
-                else
-                    printf("Solo los compradores pueden acceder a este menú.\n");
+                submenuOfertas(usuarioActual);
                 break;
 
             case 3:
                 if (usuarioActual->rol == COORDINADOR)
-                    mostrarSubmenuUsuarios(usuarioActual);
+                    submenuUsuarios();
                 else
-                    printf(" Solo coordinadores pueden gestionar usuarios.\n");
+                    printf("No tiene permisos.\n");
                 break;
 
             case 4:
-                mostrarSubmenuArchivos(usuarioActual);
+                if (usuarioActual->rol == COORDINADOR)
+                    submenuArchivos();
+                else
+                    printf("No tiene permisos.\n");
                 break;
 
             case 5:
                 if (usuarioActual->rol == COORDINADOR)
-                    mostrarSubmenuEstadisticas(usuarioActual);
+                    submenuEstadisticas();
                 else
-                    printf("No autorizado.\n");
+                    printf("No tiene permisos.\n");
                 break;
 
-            case 6:
+            case 0:
                 printf("Cerrando sesión...\n");
                 break;
 
             default:
-                printf(" Opción inválida.\n");
-                break;
+                printf("Opción inválida.\n");
         }
-
-    } while (opcion != 6);
+    } while (opcion != 0);
 }
-
