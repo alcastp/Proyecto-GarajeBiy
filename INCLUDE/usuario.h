@@ -1,18 +1,26 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-typedef enum {COORDINADOR, COMPRADOR} Rol;
+#define MAX_USUARIOS 100
+
+typedef enum {
+    COMPRADOR = 1,
+    COORDINADOR = 2
+} Rol;
 
 typedef struct {
-    int id;
+    int idUsuario;
     char nombre[50];
-    char correo[50];
-    char clave[30];
+    char contrasena[30];
     Rol rol;
 } Usuario;
 
-void cargarUsuariosCSV();
-void guardarUsuariosCSV();
-Usuario* login();
+extern Usuario usuariosRegistrados[MAX_USUARIOS];
+extern int totalUsuarios;
+
+Usuario* iniciarSesion();
+void crearUsuario();
+void listarUsuarios();
+void eliminarUsuario();
 
 #endif
