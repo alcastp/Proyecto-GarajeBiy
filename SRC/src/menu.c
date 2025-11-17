@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include "menu.h"
 
-void limpiarBuffer() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
 
 // ========================================================
 //                    MENÚ PRINCIPAL

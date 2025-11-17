@@ -97,3 +97,7 @@ void listarUsuarios() {
 void eliminarUsuario() {
     printf("Función eliminarUsuario() aún no implementada.\n");
 }
+
+Usuario* login() {
+    return iniciarSesion();
+}

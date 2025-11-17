@@ -19,6 +19,7 @@ extern Usuario usuariosRegistrados[MAX_USUARIOS];
 extern int totalUsuarios;
 
 Usuario* iniciarSesion();
+Usuario* login();
 void crearUsuario();
 void listarUsuarios();
 void eliminarUsuario();
