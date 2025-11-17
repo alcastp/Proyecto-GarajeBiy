@@ -5,6 +5,12 @@
 #include "ofertas.h"
 #include "usuario.h"
 
+// Estas declaraciones le dicen a estadisticas.c
+// que las variables globales están definidas en OTROS .c
+extern int totalSubastas;
+extern int totalOfertas;
+extern Garaje listaSubastas[MAX_SUBASTAS];
+
 // ===================================================
 //   FUNCIONES DE ESTADÍSTICAS DEL SISTEMA
 // ===================================================
