@@ -1,5 +1,61 @@
 #include "extra.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
+void limpiarBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+}
+
+void pausar() {
+    printf("\nPresione Enter para continuar...");
+    limpiarBuffer();
+}
+
+int pedirEntero(const char *mensaje) {
+    int valor;
+    int ok;
+    do {
+        printf("%s", mensaje);
+        ok = scanf("%d", &valor);
+        if (!ok) {
+            printf("Entrada inválida. Debe ser un número entero.\n");
+            limpiarBuffer();
+        }
+    } while (!ok);
+
+    limpiarBuffer();
+    return valor;
+}
+
+float pedirFlotante(const char *mensaje) {
+    float valor;
+    int ok;
+    do {
+        printf("%s", mensaje);
+        ok = scanf("%f", &valor);
+        if (!ok) {
+            printf("Entrada inválida. Debe ser un número decimal.\n");
+            limpiarBuffer();
+        }
+    } while (!ok);
+
+    limpiarBuffer();
+    return valor;
+}
+
+void obtenerFechaActual(char *bufferFecha, int tam) {
+    time_t t = time(NULL);
+    struct tm *fechaLocal = localtime(&t);
+
+    snprintf(bufferFecha, tam,
+             "%02d/%02d/%04d",
+             fechaLocal->tm_mday,
+             fechaLocal->tm_mon + 1,
+             fechaLocal->tm_year + 1900);
+}
 
 #define MAX_LINE_LENGTH 1024
 #define MAX_FIELDS 300
